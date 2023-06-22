@@ -18,15 +18,16 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
-
+        actions: [
+          CustomSwitcher(),
+        ],
       ),
 
-      body: Center(
-        child: Switch(
-          value: AppController.instance.isDarkTheme,
-          onChanged: (value){
-            AppController.instance.changeTheme();
-          },),
+      body: Column(
+        children: [
+          Text('Contador: $counter'),
+          CustomSwitcher(),
+        ]
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -40,3 +41,15 @@ class HomePageState extends State<HomePage> {
   }
 }
 
+class CustomSwitcher extends StatelessWidget {
+  const CustomSwitcher({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+      value: AppController.instance.isDarkTheme,
+      onChanged: (value){
+        AppController.instance.changeTheme();
+      },);
+  }
+}
